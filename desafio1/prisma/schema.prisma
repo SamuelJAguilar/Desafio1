@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//Creacion de Tabla Event y TicketType
+
+model Event {
+  id          Int      @id @default(autoincrement()) //Llave primaria auto incremental
+  createdAt   DateTime @default(now()) //Fecha de creacion por defecto
+  updatedAt   DateTime @updatedAt  //Fecha de actualizacion automatica
+  title       String
+  description String
+  date        DateTime
+  location    String
+  lat         Float?
+  lng         Float?
+  imageData   Bytes?    // ← IMAGEN guardada como BLOB
+  imageType   String?   // ← El tipo de imagen: "image/jpeg", "image/png"
+  imageName   String?   // ← "Nombredelaimagen.jpg"
+  
+  ticketTypes TicketType[]  //Relacion uno a muchos con TicketType
+}
+
+model TicketType {
+  id        Int    @id @default(autoincrement()) //Llave primaria auto incremental
+  name      String
+  price     Float
+  eventId   Int
+  
+  event     Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}
