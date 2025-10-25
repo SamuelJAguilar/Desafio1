@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_desafio1/features/events/models/event_model.dart';
 import 'package:provider/provider.dart';
 import '../controllers/event_controller.dart';
 import '../widgets/contenedorEvent.dart';
-import 'event_detail_screen.dart'; 
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -54,7 +54,7 @@ class Home extends StatelessWidget {
                 padding: EdgeInsets.only(left: 50, right: 100, top: 20),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Navegar a pantalla de crear evento (lo haremos después)
+                    // Navegar a crear evento (lo haremos después)
                   },
                   child: Row(
                     children: [
@@ -90,30 +90,6 @@ class Home extends StatelessWidget {
             ),
           ),
 
-        // Estado de error
-        if (eventController.error != null)
-          Container(
-            padding: EdgeInsets.all(50),
-            child: Center(
-              child: Column(
-                children: [
-                  Icon(Icons.error, size: 50, color: Colors.red),
-                  SizedBox(height: 20),
-                  Text(
-                    eventController.error!,
-                    style: TextStyle(color: Colors.red),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: eventController.loadEvents,
-                    child: Text('Reintentar'),
-                  ),
-                ],
-              ),
-            ),
-          ),
-
         // Lista de eventos
         if (!eventController.isLoading && eventController.error == null)
           Container(
@@ -133,7 +109,8 @@ class Home extends StatelessWidget {
                 return ContenedorEvent(
                   event: event,
                   onTap: () {
-                  
+                    // Navegar a detalles del evento
+                    _navigateToEventDetails(context, event);
                   },
                 );
               },
@@ -141,19 +118,19 @@ class Home extends StatelessWidget {
           ),
 
         // Estado vacío
-        if (!eventController.isLoading && 
-            eventController.error == null && 
+        if (!eventController.isLoading &&
+            eventController.error == null &&
             eventController.events.isEmpty)
           Container(
             padding: EdgeInsets.all(100),
             child: Center(
               child: Column(
                 children: [
-                  Icon(Icons.event_busy, size: 50, color: Colors.grey),
+                  Icon(Icons.event_busy, size: 50, color: Colors.grey[600]),
                   SizedBox(height: 20),
                   Text(
                     'No hay eventos disponibles',
-                    style: TextStyle(fontSize: 18, color: Colors.grey),
+                    style: TextStyle(fontSize: 18, color:Colors.grey[600]),
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
@@ -167,6 +144,14 @@ class Home extends StatelessWidget {
             ),
           ),
       ],
+    );
+  }
+
+  void _navigateToEventDetails(BuildContext context, Event event) {
+    Navigator.pushNamed(
+      context,
+      '/event-details',
+      arguments: event, // ← Pasar el evento como argumento
     );
   }
 }

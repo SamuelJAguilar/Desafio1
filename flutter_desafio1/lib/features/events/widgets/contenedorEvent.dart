@@ -21,7 +21,7 @@ class ContenedorEvent extends StatelessWidget {
         padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: const Color.fromARGB(255, 255, 243, 187),
+          color: const Color.fromARGB(255, 230, 229, 229),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,7 +32,7 @@ class ContenedorEvent extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: event.imageData == null ? Colors.grey[300] : null,
+                  color: event.imageData == null ? const Color.fromARGB(255, 223, 221, 221) : null,
                   image: event.imageData != null 
                     ? DecorationImage(
                         image: MemoryImage(
