@@ -15,7 +15,7 @@
     the `--base-href` argument provided to `flutter build`.
   -->
   <base href="$FLUTTER_BASE_HREF">
-
+  <meta http-equiv="Content-Security-Policy" content="default-src *; img-src * 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
@@ -31,6 +31,9 @@
 
   <title>flutter_desafio1</title>
   <link rel="manifest" href="manifest.json">
+  <script>
+    window.flutterWebRenderer = "html";
+  </script>
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
