@@ -5,16 +5,14 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
    app.enableCors({
-    origin: [
-      'http://localhost:54321',  // Puerto común de Flutter Web
-      'http://localhost:63226',  // Otro puerto común
-      'http://localhost:59487',  // Otro puerto común
-      'http://127.0.0.1:54321',  // IP local
-      'http://127.0.0.1:53589',
-      'http://localhost:3000',   // Tu backend
-    ],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    // origin: ['https://sistema.com', 'https://www.sistema.com'], // solo el frontend
+    origin: (origin, callback) => {
+      callback(null, true);
+    },
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type, Authorization, Accept',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
     credentials: true,
   });
   
