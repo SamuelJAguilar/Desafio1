@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart'; // ← COMENTA
-// import 'core/providers/app_providers.dart'; // ← COMENTA
-import 'core/layout_base.dart';
+import 'package:provider/provider.dart';
+import 'core/providers/app_providers.dart';
+import 'core/layout/layout_base.dart';
 import 'features/events/screens/home.dart';
-// import 'routes/app_pages.dart'; // ← COMENTA
-// import 'routes/app_routes.dart'; // ← COMENTA
+
 
 void main() {
-  // COMENTA la inicialización de providers
-  // AppProviders.initialize();
+  AppProviders.initialize();
   
   runApp(const MyApp());
 }
@@ -18,12 +16,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Centro de Eventos',
-      // COMENTA MultiProvider y rutas
-      // home: LayoutBase(child: Home()),
-      home: Scaffold(
-        body: LayoutBase(child: Home()),
+    return MultiProvider(
+      providers: AppProviders.providers,
+      child: MaterialApp(
+        title: 'Centro de Eventos',
+
+        home: LayoutBase(child: Home()), 
+        onUnknownRoute: (settings) {
+          return MaterialPageRoute(
+            builder: (context) => LayoutBase(
+              child: Center(child: Text('Página no encontrada')),
+            ),
+          );
+        },
       ),
     );
   }

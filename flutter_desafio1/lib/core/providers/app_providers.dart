@@ -1,7 +1,7 @@
 import 'package:flutter_desafio1/core/services/event_service.dart';
 import 'package:flutter_desafio1/core/services/ticket_service.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 import '../services/api_service.dart';
 import '../../features/events/controllers/event_controller.dart';
 
@@ -28,3 +28,4 @@ class AppProviders {
         ),
       ];
 }
+

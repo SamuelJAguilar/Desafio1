@@ -4,7 +4,6 @@ import '../models/event_model.dart';
 import '../models/create_event_dto.dart';
 import '../models/update_event_dto.dart';
 
-
 class EventController with ChangeNotifier {
   final EventService eventService;
   
