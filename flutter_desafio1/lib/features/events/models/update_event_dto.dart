@@ -5,9 +5,7 @@ class UpdateEventDto {
   final String? location;
   final double? lat;
   final double? lng;
-  final List<int>? imageData;
-  final String? imageType;
-  final String? imageName;
+ 
 
   UpdateEventDto({
     this.title,
@@ -16,9 +14,6 @@ class UpdateEventDto {
     this.location,
     this.lat,
     this.lng,
-    this.imageData,
-    this.imageType,
-    this.imageName,
   });
 
   Map<String, dynamic> toJson() {
@@ -31,9 +26,6 @@ class UpdateEventDto {
     if (location != null) data['location'] = location;
     if (lat != null) data['lat'] = lat;
     if (lng != null) data['lng'] = lng;
-    if (imageData != null) data['imageData'] = imageData;
-    if (imageType != null) data['imageType'] = imageType;
-    if (imageName != null) data['imageName'] = imageName;
     
     return data;
   }

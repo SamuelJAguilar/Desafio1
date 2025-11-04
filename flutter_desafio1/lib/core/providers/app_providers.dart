@@ -6,26 +6,23 @@ import '../services/api_service.dart';
 import '../../features/events/controllers/event_controller.dart';
 
 class AppProviders {
-  static late ApiService apiService;
-  static late EventService eventService;
-  static late TicketService ticketService;
-  static late EventController eventController;
-
-  static void initialize() {
-    // Inicializar servicios
-    apiService = ApiService(client: http.Client());
-    eventService = EventService(apiService: apiService);
-    ticketService = TicketService(apiService: apiService);
-    
-    // Inicializar controladores
-    eventController = EventController(eventService: eventService);
-  }
-
-  // Método para proporcionar todos los providers a la app
   static List<ChangeNotifierProvider> get providers => [
         ChangeNotifierProvider<EventController>(
-          create: (context) => eventController,
+          create: (context) {
+            print('🔄 Creando EventController...');
+            final apiService = ApiService(client: http.Client());
+            final eventService = EventService(apiService: apiService);
+            final ticketService = TicketService(apiService: apiService);
+            
+            final controller = EventController(
+              eventService: eventService,
+              ticketService: ticketService,
+            );
+            
+            print('✅ EventController creado - ticketService: ${controller.ticketService != null ? "OK" : "NULL"}');
+            return controller;
+          },
+          lazy: false, // ✅ Forzar creación inmediata
         ),
       ];
 }
-

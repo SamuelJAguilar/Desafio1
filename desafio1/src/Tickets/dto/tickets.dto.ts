@@ -7,6 +7,5 @@ export class CreateTicketDto {
 
   @IsNumber()
   @IsPositive({ message: 'El precio debe ser mayor a 0' })
-  @Min(1, { message: 'El precio mínimo es 1' })
   price: number;
 }

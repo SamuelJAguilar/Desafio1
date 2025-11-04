@@ -1,3 +1,5 @@
+import 'package:flutter_desafio1/features/events/models/create_tickets_dto.dart';
+
 class CreateEventWithTicketsDto {
   final String title;
   final String description;
@@ -21,7 +23,7 @@ class CreateEventWithTicketsDto {
     return {
       'title': title,
       'description': description,
-      'date': date.toIso8601String(),
+      'date': date.toUtc().toIso8601String(),
       'location': location,
       'lat': lat,
       'lng': lng,
@@ -30,19 +32,3 @@ class CreateEventWithTicketsDto {
   }
 }
 
-class CreateTicketDto {
-  final String name;
-  final double price;
-
-  CreateTicketDto({
-    required this.name,
-    required this.price,
-  });
-
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'price': price,
-    };
-  }
-}

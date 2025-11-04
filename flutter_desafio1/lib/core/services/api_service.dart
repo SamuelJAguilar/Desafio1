@@ -5,7 +5,6 @@ class ApiService {
   static const String baseUrl = 'http://localhost:3000';
   
   final http.Client client;
-
   ApiService({required this.client});
 
   // Método genérico para GET requests

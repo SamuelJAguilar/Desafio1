@@ -1,7 +1,9 @@
 import 'package:flutter_desafio1/features/events/models/create_event_dto.dart';
+import 'package:flutter_desafio1/features/events/models/create_tickets_dto.dart';
 import 'package:flutter_desafio1/features/events/models/event_model.dart';
 import 'package:flutter_desafio1/features/events/models/ticket_type_model.dart';
 import 'package:flutter_desafio1/features/events/models/update_event_dto.dart';
+import 'package:flutter_desafio1/features/events/models/update_ticket_dto.dart';
 
 import '../../../core/services/api_service.dart';
 
@@ -51,6 +53,7 @@ class EventService {
       throw Exception('Error creating event: $e');
     }
   }
+  
 
   // Actualizar evento
   Future<Event> updateEvent(int id, UpdateEventDto updateData) async {
